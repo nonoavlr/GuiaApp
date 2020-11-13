@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
 const config = require('./config/config')
 
-mongoose.connect(config.bd_url, config.bd_options);
-mongoose.set('useCreateIndex', true);
+async function connectToMongo(){
+    await mongoose.connect(config.bd_url, config.bd_options);
+    mongoose.set('useCreateIndex', true);
+}
+
+connectToMongo();
 
 mongoose.connection.on('connected', () => {
     console.log('Aplicação conectada ao banco de dados!')
